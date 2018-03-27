@@ -1,0 +1,80 @@
+/v1/divisions:
+    post:
+        tags: 
+            - divisions
+        summary: Creates a division
+        description: Creates a division. 
+        operationId: createDivision.js
+        consumes:
+            - application/json
+        produces:
+            - application/json
+        parameters:
+        -   name: Authorization
+            in: header
+            description: Authorization token
+            required: true
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+        -   name: body
+            in: body
+            required: true
+            schema:
+                type: object
+                required:
+                    - name
+                    - gender_id
+                    - skill
+                properties:
+                    name:
+                        type: string
+                        example: 3th
+                    gender_id:
+                        type: integer
+                        minimum: 1
+                        example: 1
+                    abbreviation:
+                        type: string
+                        example: 3BD
+                    skill:
+                        type: string
+                        example: Developmental
+        responses:
+            201:
+                description: Created
+                headers:
+                    Location:
+                        description: http://localhost:8080/api/v1/divisions/1
+                        type: string
+                        format: uri
+                schema:
+                    type: object
+                    required:
+                        - _links
+                    properties:
+                        _links:
+                            type: object
+                            required:
+                                - self
+                            properties:
+                                self:
+                                    type: object
+                                    required:
+                                        - href
+                                    properties:
+                                        href:
+                                            type: string
+                                            format: uri
+                                            example: http://localhost:8080/divisions/1
+            400:
+                description: Bad Request
+                schema:
+                    type: object
+                    required:
+                        - error
+                    properties:
+                        error:
+                            type: string
+                            example: Validation error, The division name "division name" already exists
+            500:
+                description: Internal server error

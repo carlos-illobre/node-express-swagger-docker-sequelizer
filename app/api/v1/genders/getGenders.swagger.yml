@@ -1,0 +1,48 @@
+/v1/genders:
+    get:
+        tags:
+            - genders
+        summary: Get all the genders
+        description: Get all the genders. This is a public endpoint.
+        operationId: getGenders.js
+        produces:
+            - application/json
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - genders
+                    properties:
+                        genders:
+                            type: array
+                            items:
+                                type: object
+                                required:
+                                    - id
+                                    - name
+                                    - _links
+                                properties:
+                                    id:
+                                        type: number
+                                        example: 1
+                                    name:
+                                        type: string
+                                        example: Girls
+                                    _links:
+                                        type: object
+                                        required:
+                                            - self
+                                        properties:
+                                            self:
+                                                type: object
+                                                required:
+                                                    - href
+                                                properties:
+                                                    href:
+                                                        type: string
+                                                        format: uri
+                                                        example: http://localhost:8080/genders/1
+            500:
+                description: Internal server error

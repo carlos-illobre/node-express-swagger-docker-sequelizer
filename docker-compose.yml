@@ -1,0 +1,32 @@
+version: '2'
+services:
+  web:
+    build: .
+    environment:
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      # MYSQL_HOST is the database service name
+      MYSQL_HOST: mysql
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      NODE_ENV: '${NODE_ENV}'
+      JWT_SEED: '${JWT_SEED}'
+      JWT_EXPIRES_IN: '${JWT_EXPIRES_IN}'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app
+  mysql:
+    image: mysql:8.0.3 
+    ports:
+      - '33068:33068'
+    environment:
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+    volumes:
+      - mysql:/var/lib/mysql
+volumes:
+  mysql:

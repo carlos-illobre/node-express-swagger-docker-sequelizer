@@ -1,0 +1,39 @@
+/v1/divisions/abbreviation:
+    get:
+        tags:
+            - divisions
+        summary: Generate a division abbreviation
+        description: Generate a division abbreviation. This is a public endpoint.
+        operationId: getAbbreviation.js
+        produces:
+            - application/json
+        parameters:
+        -   name: name
+            in: query
+            description: Division name
+            required: true
+            type: string
+            example: 3rd
+        -   name: gender
+            in: query
+            description: Division gender
+            required: true
+            type: string
+            example: Boys
+        -   name: skill
+            in: query
+            description: Division skill
+            required: true
+            type: string
+            example: Develomental
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - abbreviation
+                    properties:
+                        abbreviation:
+                            type: string
+                            example: 3BD

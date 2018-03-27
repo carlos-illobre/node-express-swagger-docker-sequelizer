@@ -1,0 +1,45 @@
+ /v1/users/login:
+    post:
+        tags: 
+            - users
+        summary: User login
+        description: User login
+        operationId: login.js
+        consumes:
+            - application/json
+            - application/x-www-form-urlencoded
+        produces:
+            - application/json
+        parameters:
+        -   name: body
+            in: body
+            required: true
+            schema:
+                type: object
+                properties:
+                    email:
+                        type: string
+                        example: admin@admin
+                        format: email
+                    password:
+                        type: string
+                        example: secret
+        responses:
+            201:
+                description: Created
+                schema:
+                    type: object
+                    required:
+                        - auth
+                        - token
+                    properties:
+                        auth:
+                            type: boolean
+                            example: true
+                        token:
+                            type: string
+                            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+            401:
+                description: Unathorized
+            500:
+                description: Internal server error

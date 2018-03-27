@@ -1,0 +1,31 @@
+/v1/divisions/{divisionId}/teams/{teamId}/drop:
+    delete:
+        tags:
+            - divisions
+        summary: Drop a team
+        description: Drop a team. This is a private endpoint.
+        operationId: dropTeam.js
+        produces:
+            - application/json
+        parameters:
+            -   name: divisionId
+                in: path
+                description: ID of the division
+                required: true
+                type: integer
+                format: int64
+                example: 1
+            -   name: teamId
+                in: path
+                description: ID of the team
+                required: true
+                type: integer
+                format: int64
+                example: 2
+        responses:
+            204:
+                description: No Content
+            401:
+                description: Unauthorized
+            500:
+                description: Internal server error

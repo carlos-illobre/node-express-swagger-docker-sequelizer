@@ -1,0 +1,48 @@
+/v1/events/{id}/tiebreaker:
+    get:
+        tags:
+            - events
+        summary: Get all rules for the event
+        description: Get all rules for the event. This is a public endpoint.
+        operationId: getTiebreaker.js
+        produces:
+            - application/json
+        parameters:
+        -   name: id
+            in: path
+            description: id of the event
+            required: true
+            type: integer
+            example: 1
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - points
+                    properties:
+                        points:
+                            type: array
+                            required:
+                                - id
+                                - value
+                                - teams
+                                - order
+                            items:
+                                type: object
+                                properties:
+                                    id:
+                                        type: number
+                                        example: 1
+                                    value:
+                                        type: number
+                                        example: 1
+                                    teams:
+                                        type: number
+                                        example: 1
+                                    order:
+                                        type: number
+                                        example: 1
+            500:
+                description: Internal server error

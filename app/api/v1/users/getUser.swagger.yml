@@ -1,0 +1,60 @@
+/v1/users/{id}:
+    get:
+        tags:
+            - users
+        summary: Get a user
+        description: Get a user. This is a public endpoint.
+        operationId: getUser.js
+        produces:
+            - application/json
+        parameters:
+        -   name: id
+            in: path
+            description: user id
+            required: true
+            type: integer
+            example: 1
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - first_name
+                        - last_name
+                        - email
+                        - phone
+                        - _links
+                    properties:
+                        id:
+                            type: number
+                            example: 1
+                        first_name:
+                            type: string
+                            example: some
+                        last_name:
+                            type: string
+                            example: name
+                        email:
+                            type: string
+                            format: email
+                            example: some@email
+                        phone:
+                            type: string
+                            example: 555-5555
+                        _links:
+                            type: object
+                            required:
+                                - self
+                            properties:
+                                self:
+                                    type: object
+                                    required:
+                                        - href
+                                    properties:
+                                        href:
+                                            type: string
+                                            format: uri
+                                            example: http://localhost:8080/users/1
+            500:
+                description: Internal server error

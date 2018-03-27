@@ -1,0 +1,61 @@
+/v1/page/details:
+    post:
+        tags:
+            - page
+        summary: Set global defaults for pages
+        description: Set global defaults for pages. This is a public endpoint.
+        operationId: updateDetails.js
+        consumes:
+            - multipart/form-data
+        produces:
+            - application/json
+        parameters:
+            - name: logo_1
+              type: file
+              in: formData
+              example: FILE
+            - name: logo_2
+              type: file
+              in: formData
+              example: FILE
+            - name: logo_3
+              type: file
+              in: formData
+              example: FILE
+            - name: notes
+              type: string
+              in: formData
+              example: These are the default notes
+            - name: social_media
+              type: string
+              in: formData
+              example: '@primetimesportz'
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - logo_1
+                        - logo_2
+                        - logo_3
+                        - notes
+                        - social_media
+                    properties:
+                        logo_1:
+                            type: file
+                            example: FILE
+                        logo_2:
+                            type: file
+                            example: FILE
+                        logo_3:
+                            type: file
+                            example: FILE
+                        notes:
+                            type: string
+                            example: These are the default notes
+                        social_media:
+                            type: string
+                            example: '@primetimesportz'
+            500:
+                description: Internal server error

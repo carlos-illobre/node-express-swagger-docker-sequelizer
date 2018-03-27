@@ -1,0 +1,29 @@
+/v1/divisions/{divisionId}/combine/{targetId}:
+    patch:
+        tags:
+            - divisions
+        summary: Combines an origin division with a target division and deletes the origin division
+        description: Combines an origin division with a target division and deletes the origin division. This is a private endpoint.
+        operationId: combineDivision.js
+        produces:
+            - application/json
+        parameters:
+            -   name: divisionId
+                in: path
+                description: ID of the origin division
+                required: true
+                type: integer
+                format: int64
+                example: 1
+            -   name: targetId
+                in: path
+                description: ID of the target division
+                required: true
+                type: integer
+                format: int64
+                example: 2
+        responses:
+            204:
+                description: No Content
+            500:
+                description: Internal server error

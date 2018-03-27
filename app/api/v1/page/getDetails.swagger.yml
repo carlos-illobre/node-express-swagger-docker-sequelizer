@@ -1,0 +1,38 @@
+/v1/page/details:
+    get:
+        tags:
+            - page
+        summary: Get global defaults for pages
+        description: Get global defaults for pages. This is a public endpoint.
+        operationId: getDetails.js
+        produces:
+            - application/json
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - logo_1
+                        - logo_2
+                        - logo_3
+                        - notes
+                        - social_media
+                    properties:
+                        logo_1:
+                            type: string
+                            example: URL
+                        logo_2:
+                            type: string
+                            example: URL
+                        logo_3:
+                            type: string
+                            example: URL
+                        notes:
+                            type: string
+                            example: These are the default notes
+                        social_media:
+                            type: string
+                            example: '@primetimesportz'
+            500:
+                description: Internal server error
