@@ -1,0 +1,33 @@
+/v1/sports:
+    get:
+        tags:
+            - sports
+        summary: Get all the sports
+        description: Get all the sports. This is a public endpoint.
+        operationId: getSports.js
+        produces:
+            - application/json
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - sports
+                    properties:
+                        sports:
+                            type: array
+                            items:
+                                type: object
+                                required:
+                                    - id
+                                    - name
+                                properties:
+                                    id:
+                                        type: number
+                                        example: 1
+                                    name:
+                                        type: string
+                                        example: Soccer
+            500:
+                description: Internal server error

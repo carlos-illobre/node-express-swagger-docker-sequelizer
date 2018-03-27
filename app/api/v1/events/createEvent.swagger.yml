@@ -1,0 +1,216 @@
+/v1/events:
+    post:
+        tags: 
+            - events
+        summary: Creates an event
+        description: Creates an event. 
+        operationId: createEvent.js
+        consumes:
+            - application/json
+        produces:
+            - application/json
+        parameters:
+        -   name: Authorization
+            in: header
+            description: Authorization token
+            required: true
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+        -   name: body
+            in: body
+            required: true
+            schema:
+                type: object
+                required:
+                    - sport
+                    - name
+                    - dates
+                    - image
+                properties:
+                    sport:
+                        type: object
+                        required:
+                            - id
+                        properties:
+                            id:
+                                type: number
+                                example: 1
+                                minimum: 1
+                                description: The internal sport id
+                    name:
+                        type: string
+                        example: Event1
+                    dates:
+                        type: object
+                        required:
+                            - start
+                            - end
+                        properties:
+                            start:
+                                type: string
+                                format: date
+                                example: 2017-07-21
+                            end:
+                                type: string
+                                format: date
+                                example: 2017-07-21
+                    image:
+                        type: object
+                        required:
+                            - url
+                        properties:
+                            url:
+                                type: string
+                                format: uri
+                                example: https://www.google.com
+                    teams:
+                        type: array
+                        items:
+                            type: object
+                            required:
+                                - name
+                            properties:
+                                external_team_id:
+                                    type: number
+                                    example: 1
+                                    minimum: 1
+                                name:
+                                    type: string
+                                    example: team name
+                                external_coach_id:
+                                    type: number
+                                    example: 1
+                                    minimum: 1
+                    divisions:
+                        type: array
+                        items:
+                            type: object
+                            required:
+                                - name
+                            properties:
+                                name:
+                                    type: string
+                                    example: division name
+                                abbreviation:
+                                    type: string
+                                    example: UDB
+                                skill:
+                                    type: string
+                                    example: some skill
+                                gender:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: number
+                                            example: 1
+                                            minimum: 1
+                                teams:
+                                    type: array
+                                    items:
+                                        type: object
+                                        properties:
+                                            external_team_id:
+                                                type: number
+                                                example: 1
+                                                minimum: 1
+                    coaches:
+                        type: array
+                        items:
+                            type: object
+                            properties:
+                                external_coach_id:
+                                    type: number
+                                    example: 1
+                                    minimum: 1
+                                first_name:
+                                    type: string
+                                    example: Greg
+                                last_name:
+                                    type: string
+                                    example: Williams
+                                email:
+                                    type: string
+                                    format: email
+                                    example: gwilliams@bluestarsports.com
+                                phone:
+                                    type: string
+                                    example: 5555-5555
+                    facilities:
+                        type: array
+                        items:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                    example: some facility
+                                abbreviation:
+                                    type: string
+                                    example: XX
+                                street:
+                                    type: string
+                                    example: some street
+                                city:
+                                    type: string
+                                    example: some city
+                                zip:
+                                    type: string
+                                    example: zip
+                                state:
+                                    type: object
+                                    required:
+                                        - name
+                                        - abbreviation
+                                    properties:
+                                        name:
+                                            type: string
+                                            example: some state
+                                        abbreviation:
+                                            type: string
+                                            example: TT
+                                map:
+                                    type: object
+                                    required:
+                                        - url
+                                    properties:
+                                        url:
+                                            type: string
+                                            example: http://www.someurl.com
+        responses:
+            201:
+                description: Created
+                headers:
+                    Location:
+                        description: http://localhost:8080/api/v1/events/1
+                        type: string
+                        format: uri
+                schema:
+                    type: object
+                    required:
+                        - _links
+                    properties:
+                        _links:
+                            type: object
+                            required:
+                                - self
+                            properties:
+                                self:
+                                    type: object
+                                    required:
+                                        - href
+                                    properties:
+                                        href:
+                                            type: string
+                                            format: uri
+                                            example: http://localhost:8080/events/1
+            400:
+                description: Bad Request
+                schema:
+                    type: object
+                    required:
+                        - error
+                    properties:
+                        error:
+                            type: string
+                            example: Validation error, The event name "event name" already exists
+            500:
+                description: Internal server error

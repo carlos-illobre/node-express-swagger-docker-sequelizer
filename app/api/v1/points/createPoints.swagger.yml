@@ -1,0 +1,44 @@
+/v1/points:
+    post:
+        tags:
+            - points
+        summary: Creates new global custom points
+        description: Creates new global custom points. This is a private endpoint.
+        operationId: createPoints.js
+        produces:
+            - application/json
+        parameters:
+        -   name: Authorization
+            in: header
+            description: Authorization token
+            required: true
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+        -   name: body
+            in: body
+            required: true
+            schema:
+                type: object
+                properties:
+                    id:
+                        type: number
+                        example: 1
+                    name:
+                        type: string
+                        example: Points for a Win
+                    values:
+                        type: object
+                        example: {}
+                    points:
+                        type: number
+                        example: 1
+                    group:
+                        type: number
+                        example: 1
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+            500:
+                description: Internal server error

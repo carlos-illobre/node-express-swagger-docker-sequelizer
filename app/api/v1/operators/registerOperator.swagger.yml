@@ -1,0 +1,46 @@
+ /v1/operators:
+    post:
+        tags:
+            - operators
+        summary: Creates an operator
+        description: Creates an operator and returns the login token
+        operationId: registerOperator.js
+        consumes:
+            - application/json
+        produces:
+            - application/json
+        parameters:
+        -   name: body
+            in: body
+            required: true
+            schema:
+                type: object
+                required:
+                    - name
+                    - password
+                properties:
+                    name:
+                        type: string
+                        example: operator1
+                    password:
+                        type: string
+                        example: secret
+        responses:
+            201:
+                description: Created
+                schema:
+                    type: object
+                    required:
+                        - auth
+                        - token
+                    properties:
+                        auth:
+                            type: boolean
+                            example: true
+                        token:
+                            type: string
+                            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+            400:
+                description: Bad Request
+            500:
+                description: Internal server error

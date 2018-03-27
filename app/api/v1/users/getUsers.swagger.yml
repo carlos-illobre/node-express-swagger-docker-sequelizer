@@ -1,0 +1,97 @@
+/v1/users:
+    get:
+        tags:
+            - users
+        summary: Get all users
+        description: Get all users. This is a public endpoint.
+        operationId: getUsers.js
+        produces:
+            - application/json
+        parameters:
+        -   in: query
+            name: search
+            schema:
+                type: string
+            description: A database like filter
+            example: Ryan%n
+        -   in: query
+            name: sort
+            schema:
+                type: string
+            description: The field to sort the list. Use a 'minus' to sort desc (-last_name)
+            example: last_name
+        -   in: query
+            name: page
+            schema:
+                type: number
+            description: The page number starting from 1
+            example: 1
+        -   in: query
+            name: limit
+            schema:
+                type: number
+            description: The page size
+            example: 10
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - users
+                    properties:
+                        events:
+                            type: array
+                            items:
+                                type: object
+                                required:
+                                    - id
+                                    - first_name
+                                    - last_name
+                                    - email
+                                    - phone
+                                    - roles
+                                    - _links
+                                properties:
+                                    id:
+                                        type: number
+                                        example: 1
+                                    first_name:
+                                        type: string
+                                        example: Greg
+                                    last_name:
+                                        type: string
+                                        example: Williams
+                                    email:
+                                        type: string
+                                        format: email
+                                        example: gwilliams@aausports.com
+                                    phone:
+                                        type: string
+                                        example: 407.934.7200
+                                    roles:
+                                        type: array
+                                        items:
+                                            type: object
+                                            required:
+                                                - name
+                                            properties:
+                                                name:
+                                                    type: string
+                                                    example: Admin
+                                    _links:
+                                        type: object
+                                        required:
+                                            - self
+                                        properties:
+                                            self:
+                                                type: object
+                                                required:
+                                                    - href
+                                                properties:
+                                                    href:
+                                                        type: string
+                                                        format: uri
+                                                        example: http://localhost:8080/users/1
+            500:
+                description: Internal server error

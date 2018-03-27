@@ -1,0 +1,31 @@
+/v1/teams/{teamId}:
+    put:
+        tags:
+            - teams
+        summary: Updates a team
+        description: Updates a team. This is a private endpoint.
+        operationId: updateTeam.js
+        produces:
+            - application/json
+        parameters:
+            -   name: teamId
+                in: path
+                description: ID of the team
+                required: true
+                type: integer
+                format: int64
+            -   in: body
+                name: body
+                description: Team object
+                type: object
+                schema:
+                    type: object
+                    properties:
+                        name:
+                            type: string
+                required: true
+        responses:
+            204:
+                description: No Content
+            500:
+                description: Internal server error

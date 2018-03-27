@@ -1,0 +1,73 @@
+ /v1/users:
+    post:
+        tags: 
+            - users
+        summary: Creates a user
+        description: Creates a user 
+        operationId: createUser.js
+        consumes:
+            - application/json
+            - application/x-www-form-urlencoded
+        produces:
+            - application/json
+        parameters:
+        -   name: Authorization
+            in: header
+            description: Authorization token
+            required: true
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+        -   name: body
+            in: body
+            required: true
+            schema:
+                type: object
+                properties:
+                    first_name:
+                        type: string
+                        example: Greg
+                    last_name:
+                        type: string
+                        example: Williams
+                    email:
+                        type: string
+                        example: gwilliams@bluestarspots.com
+                        format: email
+                    phone:
+                        type: string
+                        example: 555-5555
+        responses:
+            201:
+                description: Created
+                headers:
+                    Location:
+                        description: http://localhost:8080/api/v1/users/1
+                        type: string
+                        format: uri
+                schema:
+                    type: object
+                    required:
+                        - _links
+                    properties:
+                        _links:
+                            type: object
+                            required:
+                                - id
+                                - self
+                            properties:
+                                id:
+                                    type: number
+                                    example: 1
+                                self:
+                                    type: object
+                                    required:
+                                        - href
+                                    properties:
+                                        href:
+                                            type: string
+                                            format: uri
+                                            example: http://localhost:8080/users/1
+            400:
+                description: Bad Request
+            500:
+                description: Internal server error

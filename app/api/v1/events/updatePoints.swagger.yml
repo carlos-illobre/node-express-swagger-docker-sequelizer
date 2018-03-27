@@ -1,0 +1,43 @@
+/v1/events/{id}/points:
+    put:
+        tags:
+            - events
+        summary: Updates all points for the event
+        description: updates all points for the event. This is a private endpoint.
+        operationId: updatePoints.js
+        produces:
+            - application/json
+        parameters:
+        -   name: id
+            in: path
+            description: id of the event
+            required: true
+            type: integer
+            example: 1
+        -   name: Authorization
+            in: header
+            description: Authorization token
+            required: true
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+        -   name: body
+            in: body
+            required: true
+            schema:
+                type: array
+                items:
+                    type: object
+                    properties:
+                        id:
+                            type: number
+                            example: 1
+                        points:
+                            type: number
+                            example: 1
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+            500:
+                description: Internal server error

@@ -1,0 +1,41 @@
+/v1/tiebreakers:
+    get:
+        tags:
+            - operators
+        summary: Get all the rules for the operator
+        description: Get all the rules for the operator. This is a private endpoint.
+        operationId: getTiebreakers.js
+        produces:
+            - application/json
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - points
+                    properties:
+                        tiebreakers:
+                            type: array
+                            items:
+                                type: object
+                                required:
+                                    - id
+                                    - value
+                                    - teams
+                                    - order
+                                properties:
+                                    id:
+                                        type: number
+                                        example: 1
+                                    value:
+                                        type: number
+                                        example: 1
+                                    teams:
+                                        type: number
+                                        example: 2
+                                    order:
+                                        type: number
+                                        example: 1
+            500:
+                description: Internal server error

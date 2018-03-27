@@ -1,0 +1,29 @@
+/v1/users/{id}:
+    delete:
+        tags:
+            - users
+        summary: Delete a user
+        description: Delete a user.
+        operationId: deleteUser.js
+        produces:
+            - application/json
+        parameters:
+        -   name: Authorization
+            in: header
+            description: Authorization token
+            required: true
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+        -   name: id
+            in: path
+            description: user id
+            required: true
+            type: integer
+            example: 10
+        responses:
+            204:
+                description: No Content
+            404:
+                description: Not found
+            500:
+                description: Internal server error

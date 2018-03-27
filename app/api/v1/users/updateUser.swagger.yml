@@ -1,0 +1,51 @@
+ /v1/users/{id}:
+    put:
+        tags: 
+            - users
+        summary: Updates a user
+        description: Updates a user 
+        operationId: updateUser.js
+        consumes:
+            - application/json
+            - application/x-www-form-urlencoded
+        produces:
+            - application/json
+        parameters:
+        -   name: Authorization
+            in: header
+            description: Authorization token
+            required: true
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+        -   name: id
+            in: path
+            description: user id
+            required: true
+            type: integer
+            example: 10
+        -   name: body
+            in: body
+            required: true
+            schema:
+                type: object
+                properties:
+                    first_name:
+                        type: string
+                        example: Greg
+                    last_name:
+                        type: string
+                        example: Williams
+                    email:
+                        type: string
+                        example: gwilliams@bluestarsports.com
+                        format: email
+                    phone:
+                        type: string
+                        example: 555-5555
+        responses:
+            204:
+                description: if the user was updated
+            401:
+                description: If the user is not admin
+            500:
+                description: Internal server error

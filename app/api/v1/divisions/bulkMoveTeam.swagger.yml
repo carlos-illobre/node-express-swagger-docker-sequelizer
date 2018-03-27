@@ -1,0 +1,32 @@
+/v1/divisions/{divisionId}/move:
+    patch:
+        tags:
+            - divisions
+        summary: Moves teams in bulk to a specific division
+        description: Moves teams in bulk to a specific division. This is a private endpoint.
+        operationId: bulkMoveTeam.js
+        produces:
+            - application/json
+        parameters:
+            -   name: divisionId
+                in: path
+                description: ID of the division
+                required: true
+                type: integer
+                format: int64
+            -   in: body
+                name: body
+                description: Teams array
+                type: object
+                schema:
+                    type: object
+                    properties:
+                        teams:
+                            type: array
+                            example: [1,2]
+                required: true
+        responses:
+            204:
+                description: No Content
+            500:
+                description: Internal server error

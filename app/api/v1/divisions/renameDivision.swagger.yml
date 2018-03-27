@@ -1,0 +1,45 @@
+/v1/divisions/{id}/name:
+    put:
+        tags: 
+            - divisions
+        summary: Rename a division
+        description: Rename a division. 
+        operationId: renameDivision.js
+        consumes:
+            - application/x-www-form-urlencoded
+        produces:
+            - application/json
+        parameters:
+        -   name: Authorization
+            in: header
+            description: Authorization token
+            required: true
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+        -   name: id
+            in: path
+            description: id of the division
+            required: true
+            type: integer
+            example: 1
+        -   name: name
+            in: formData
+            description: The new division name
+            required: true
+            type: string
+            example: New Division name
+        responses:
+            204:
+                description: Name succesfully updated
+            400:
+                description: If the name is empty or repeated
+                schema:
+                    type: object
+                    required:
+                        - error
+                    properties:
+                        error:
+                            type: string
+                            example: Validation error, The division name "division name" already exists
+            500:
+                description: Internal server error

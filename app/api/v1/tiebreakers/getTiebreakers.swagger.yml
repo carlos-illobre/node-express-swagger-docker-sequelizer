@@ -1,0 +1,49 @@
+/v1/tiebreakers:
+    get:
+        tags:
+            - tiebreakers
+        summary: Get all the rules
+        description: Get all the rules. This is a public endpoint.
+        operationId: getTiebreakers.js
+        produces:
+            - application/json
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - points
+                    properties:
+                        tiebreakers:
+                            type: array
+                            items:
+                                type: object
+                                required:
+                                    - id
+                                    - name
+                                    - values
+                                    - value
+                                    - teams
+                                    - sport_id
+                                properties:
+                                    id:
+                                        type: number
+                                        example: 1
+                                    name:
+                                        type: string
+                                        example: Coin flip
+                                    values:
+                                        type: object
+                                        example: {}
+                                    value:
+                                        type: number
+                                        example: 1
+                                    teams:
+                                        type: number
+                                        example: 2
+                                    sport_id:
+                                        type: number
+                                        example: 1
+            500:
+                description: Internal server error

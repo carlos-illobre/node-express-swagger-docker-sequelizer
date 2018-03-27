@@ -1,0 +1,39 @@
+/v1/divisions/{id}/abbreviation:
+    put:
+        tags:
+            - divisions
+        summary: Change abbreviation of a division
+        description: Change abbreviation of a division.
+        operationId: updateAbbreviation.js
+        consumes:
+            - application/x-www-form-urlencoded
+        produces:
+            - application/json
+        parameters:
+        -   name: Authorization
+            in: header
+            description: Authorization token
+            required: true
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+        -   name: id
+            in: path
+            description: id of the division
+            required: true
+            type: integer
+            example: 1
+        -   name: abbreviation
+            in: formData
+            description: The new division abbreviation
+            required: true
+            type: string
+            example: NABBR
+        responses:
+            204:
+                description: abbreviation succesfully updated
+            400:
+                description: If the abbreviation is empty
+            401:
+                description: Unauthorized
+            500:
+                description: Internal server error

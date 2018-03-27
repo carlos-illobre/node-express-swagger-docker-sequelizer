@@ -1,0 +1,119 @@
+/v1/events:
+    get:
+        tags:
+            - events
+        summary: Get all the events
+        description: Get all the events. This is a public endpoint.
+        operationId: getEvents.js
+        produces:
+            - application/json
+        parameters:
+        -   in: query
+            name: search
+            schema:
+                type: string
+                format: regexp
+            description: A regular expression to filter the event name and location
+            example: ^[h|a|t]
+        -   in: query
+            name: max_start_date
+            schema:
+                type: string
+                format: date
+            description: The maximun event start date
+            example: 2017-12-23
+        -   in: query
+            name: min_start_date
+            schema:
+                type: string
+                format: date
+            description: The minimun event start date
+            example: 2017-12-23
+        -   in: query
+            name: sort
+            schema:
+                type: string
+            description: The field to sort the event list. Use a 'minus' to sort desc -start_date
+            example: start_date
+        -   in: query
+            name: page
+            schema:
+                type: number
+            description: The page number starting from 1
+            example: 1
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - events
+                    properties:
+                        events:
+                            type: array
+                            items:
+                                type: object
+                                required:
+                                    - id
+                                    - name
+                                    - image_url
+                                    - location
+                                    - start_date
+                                    - end_date
+                                    - teams
+                                    - divisions
+                                    - _links
+                                properties:
+                                    id:
+                                        type: number
+                                        example: 1
+                                    name:
+                                        type: string
+                                        example: Event 1
+                                    image_url:
+                                        type: string
+                                        format: uri
+                                        example: https://placekitten.com/120/40
+                                    location:
+                                        type: string
+                                        example: Event 1
+                                    start_date:
+                                        type: string
+                                        format: date
+                                        example: 2017-11-30 16:06:39.557 +00:00
+                                    end_date:
+                                        type: string
+                                        format: date
+                                        example: 2017-11-30 16:06:39.557 +00:00
+                                    teams:
+                                        type: object
+                                        required:
+                                            - count
+                                        properties:
+                                            count:
+                                                type: number
+                                                example: 10
+                                    divisions:
+                                        type: object
+                                        required:
+                                            - count
+                                        properties:
+                                            count:
+                                                type: number
+                                                example: 10
+                                    _links:
+                                        type: object
+                                        required:
+                                            - self
+                                        properties:
+                                            self:
+                                                type: object
+                                                required:
+                                                    - href
+                                                properties:
+                                                    href:
+                                                        type: string
+                                                        format: uri
+                                                        example: http://localhost:8080/events/1
+            500:
+                description: Internal server error

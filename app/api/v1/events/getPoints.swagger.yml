@@ -1,0 +1,40 @@
+/v1/events/{id}/points:
+    get:
+        tags:
+            - events
+        summary: Get all points for the event
+        description: Get all points for the event. This is a public endpoint.
+        operationId: getPoints.js
+        produces:
+            - application/json
+        parameters:
+        -   name: id
+            in: path
+            description: id of the event
+            required: true
+            type: integer
+            example: 1
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - points
+                    properties:
+                        points:
+                            type: array
+                            required:
+                                - id
+                                - points
+                            items:
+                                type: object
+                                properties:
+                                    id:
+                                        type: number
+                                        example: 1
+                                    points:
+                                        type: number
+                                        example: 1
+            500:
+                description: Internal server error

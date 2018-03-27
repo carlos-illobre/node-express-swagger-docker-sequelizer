@@ -1,0 +1,57 @@
+/v1/divisions/{id}:
+    get:
+        tags:
+            - divisions
+        summary: Get one division
+        description: Get one division. This is a public endpoint.
+        operationId: getDivision.js
+        produces:
+            - application/json
+        parameters:
+        -   name: id
+            in: path
+            description: id of the division
+            required: true
+            type: integer
+            example: 1
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    required:
+                        - id
+                        - name
+                        - gender
+                        - _links
+                    properties:
+                        id:
+                            type: number
+                            example: 1
+                        name:
+                            type: string
+                            example: Division1
+                        gender:
+                            type: object
+                            required:
+                                - name
+                            properties:
+                                name:
+                                    type: string
+                                    example: girls
+                        _links:
+                            type: object
+                            required:
+                                - self
+                            properties:
+                                self:
+                                    type: object
+                                    required:
+                                        - href
+                                    properties:
+                                        href:
+                                            type: string
+                                            format: uri
+                                            example: http://localhost:8080/divisions/1
+            500:
+                description: Internal server error

@@ -1,0 +1,41 @@
+/v1/tiebreakers:
+    post:
+        tags:
+            - tiebreakers
+        summary: Creates new global rules
+        description: Creates new global rules. This is a private endpoint.
+        operationId: createTiebreakers.js
+        produces:
+            - application/json
+        parameters:
+        -   name: Authorization
+            in: header
+            description: Authorization token
+            required: true
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjF9LCJpYXQiOjE1MTAxNTI2MDEsImV4cCI6MTUxMDIzOTAwMX0.5JmvBOkG3jkhQfZwB61o650P0XDqIijuRv41m6Sn6Qk
+        -   name: body
+            in: body
+            required: true
+            schema:
+                type: object
+                properties:
+                    id:
+                        type: number
+                        example: 1
+                    value:
+                        type: number
+                        example: 1
+                    teams:
+                        type: number
+                        example: 1
+                    order:
+                        type: number
+                        example: 1
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+            500:
+                description: Internal server error
