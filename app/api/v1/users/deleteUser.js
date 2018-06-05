@@ -1,6 +1,6 @@
 const express = require('express');
-const authJwt = require(`${process.env.PWD}/app/authJwtMiddleware.js`);
-const authAdminJwt = require(`${process.env.PWD}/app/authAdminJwtMiddleware.js`);
+const authJwt = require(`${process.env.PWD}/app/auth/jwtAuthMiddleware.js`);
+const authAdminJwt = require(`${process.env.PWD}/app/auth/adminAuthJwtMiddleware.js`);
 
 module.exports = express
 .Router({mergeParams: true})

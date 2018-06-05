@@ -1,5 +1,5 @@
 const express = require('express');
-const authJwt = require(`${process.env.PWD}/app/authJwtMiddleware.js`);
+const authJwt = require(`${process.env.PWD}/app/auth/jwtAuthMiddleware.js`);
 const multer  = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({

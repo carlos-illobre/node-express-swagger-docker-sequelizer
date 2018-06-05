@@ -1,7 +1,7 @@
 const express = require('express');
 const validate = require('express-validation');
 const Joi = require('joi');
-const authJwt = require(`${process.env.PWD}/app/authJwtMiddleware.js`);
+const authJwt = require(`${process.env.PWD}/app/auth/jwtAuthMiddleware.js`);
 
 module.exports = express
 .Router({mergeParams: true})

@@ -1,5 +1,5 @@
 const express = require('express');
-const authJwt = require(`${process.env.PWD}/app/authJwtMiddleware.js`);
+const authJwt = require(`${process.env.PWD}/app/auth/jwtAuthMiddleware.js`);
 const halson = require('halson');
 const _ = require('lodash');
 const Op = require('sequelize').Op;

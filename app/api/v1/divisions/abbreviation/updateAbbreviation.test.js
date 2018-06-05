@@ -12,7 +12,7 @@ describe('PUT api/v1/divisions/:id/abbreviation', function () {
         return createTestApp(this);
     });
 
-    it.only('return 204 if the division abbreviation was updated by an authenticated operator', async function() {
+    it('return 204 if the division abbreviation was updated by an authenticated operator', async function() {
         const abbr = 'NABBR';
 
         const division = await this.db.Division.create({
